@@ -3,7 +3,7 @@ import {
 	Float32BufferAttribute,
 	Vector3
 } from './three.module.js';
-import * as BufferGeometryUtils from './BufferGeometryUtils.js';
+import { BufferGeometryUtils } from './BufferGeometryUtils.js';
 /**
  *	Simplification Geometry Modifier
  *    - based on code and technique
