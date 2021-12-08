@@ -11,7 +11,6 @@ import * as BufferGeometryUtils  from './BufferGeometryUtils.js';
  *	  - Progressive Mesh type Polygon Reduction Algorithm
  *    - http://www.melax.com/polychop/
  */
-
 const _cb = new Vector3(), _ab = new Vector3();
 
 class SimplifyModifier {
