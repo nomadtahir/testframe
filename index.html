@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Model Viewer AR - VR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script type='module' src='../node_modules/super-three/build/three.module.js'></script>
+    <script type='module'>
+        import {SimplifyModifier} from "../node_modules/super-three/examples/jsm/modifiers/SimplifyModifier.js"
+        var modifer = new SimplifyModifier();
+        var sceneEl = document.querySelector('a-scene').object3D;
+        var scene = sceneEl
+        var loader = new THREE.GLTFLoader();
+        const pickableObjects = []
+        const lod = new THREE.LOD();
+        loader.load('https://cdn.glitch.me/00f2d644-93e9-43db-b8e5-cac6ced4b897%2FtestNew4LOD.glb?', function (gltf) {
+            var model = gltf.scene
+            model.traverse(function (o) {
+                if (o instanceof THREE.Mesh) {
+                    pickableObjects.push(o)
+                    //SimplifyModifier
+                    var numVertices = o.geometry.attributes.position.count;
+                    o.geometry = modifer.modify(o.geometry, Math.floor(numVertices * 0.1));
+                    o.geometry.clearGroups()
+                    o.geometry.computeVertexNormals()
+
+                }
+            });
+            let theResult0 = new THREE.Object3D();
+            let theResult1 = new THREE.Object3D();
+            let theResult2 = new THREE.Object3D();
+
+            theResult0.add(gltf.scene.getObjectByName("Object_LOD0"))
+            theResult1.add(gltf.scene.getObjectByName("Object_LOD1"))
+            theResult2.add(gltf.scene.getObjectByName("Object_LOD2"))
+
+            /*lod.addLevel(theResult0, 30)
+            lod.addLevel(theResult1, 20)*/
+            lod.addLevel(theResult2, 10)
+            lod.scale.set(0.01, 0.01, 0.01)
+            lod.rotation.set(0, -1.5, 1.555)
+            lod.position.set(-0.7, 1, -5)
+            scene.add(lod)
+            // scene.add(gltf.scene);
+
+        });</script>
+
+
+
+</head>
+
+<body>
+
+    <body>
+        <a-scene stats="fps" renderer="colorManagement: true;" model-viewer="gltfModel: #machine; title: Machine"
+            background="color:grey" raycaster="objects: .interactable">
+            <a-entity id="rig" movement-controls="speed : 0.15 , constrainToNavMesh: true ">
+                <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"
+                    aycaster="objects: .interactable">
+                    <a-cursor color="#FF0000"></a-cursor>
+                </a-entity>
+            </a-entity>
+            <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
+            <a-assets>
+                <a-asset-item id="MachineModel"
+                    src="https://cdn.glitch.me/00f2d644-93e9-43db-b8e5-cac6ced4b897%2FtestNew4LOD.glb?"></a-asset-item>
+            </a-assets>
+            <a-entity>
+                <!-- <script type="module" src="./js/client.js"></script> -->
+            </a-entity>
+        </a-scene>
+    </body>
+
+</html>
