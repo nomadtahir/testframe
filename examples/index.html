@@ -47,15 +47,12 @@
 <body>
 
     <body>
-        <a-scene stats="fps" renderer="colorManagement: true;" model-viewer="gltfModel: #machine; title: Machine"
-            background="color:grey" raycaster="objects: .interactable">
-            <a-entity id="rig" movement-controls="speed : 0.15 , constrainToNavMesh: true ">
-                <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
-                    <a-cursor color="#FF0000"></a-cursor>
-                <a-entity oculus-touch-controls="hand: left"></a-entity>
-                <a-entity oculus-touch-controls="hand: right"></a-entity>
+        <a-scene stats="fps" renderer="colorManagement: true;" background="color:grey">
+            <a-entity id="rig" movement-controls="fly: false;">
+            <a-camera id="camera"></a-camera>
+            <a-entity hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+            <a-entity hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
                 </a-entity>
-            </a-entity>
             <a-assets>
                 <a-asset-item id="MachineModel"
                     src="https://cdn.glitch.me/00f2d644-93e9-43db-b8e5-cac6ced4b897%2FtestNew4LOD.glb?"></a-asset-item>
