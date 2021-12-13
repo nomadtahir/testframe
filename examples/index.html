@@ -50,10 +50,9 @@
         <a-scene stats="fps" renderer="colorManagement: true;" model-viewer="gltfModel: #machine; title: Machine"
             background="color:grey" raycaster="objects: .interactable">
             <a-entity id="rig" movement-controls="speed : 0.15 , constrainToNavMesh: true ">
-                <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"
-                    aycaster="objects: .interactable">
+                <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
                     <a-cursor color="#FF0000"></a-cursor>
-                      <a-entity oculus-touch-controls="hand: left"></a-entity>
+                <a-entity oculus-touch-controls="hand: left"></a-entity>
                 <a-entity oculus-touch-controls="hand: right"></a-entity>
                 </a-entity>
             </a-entity>
